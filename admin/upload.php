@@ -18,11 +18,15 @@ if (is_array($fdata['name'])) {
 } else {
     $files[] = $fdata;
 }
+$j = 1;
 foreach($files as $file){
 	move_uploaded_file($file["tmp_name"],$output_dir.$file["name"]);
-        resizejpg($output_dir.$file["name"],$output_dir.filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT).'.jpg',900);
-        resizejpg($output_dir.$file["name"],$output_dir.filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT).'_thumb.jpg',600,350);
+        resizejpg($output_dir.$file["name"],$output_dir.filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT).$j.'.jpg',1200);
+        resizejpg($output_dir.$file["name"],$output_dir.filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT).$j.'_thumb1.jpg',900);
+        resizejpg($output_dir.$file["name"],$output_dir.filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT).$j.'_thumb2.jpg',600,350);
+        unlink($output_dir.$file["name"]);
         $query = $q->query("INSERT INTO pictures VALUES(null,'%s','%d')",$con,array($file["name"],filter_input(INPUT_POST,'sessionpic',FILTER_DEFAULT)));
+        $j++;
 }
 echo '<div class="alert alert-success">uploaded!</div>';
 $con->close();

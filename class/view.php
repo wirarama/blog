@@ -80,7 +80,7 @@ class view{
         $con = $q->connect();
         $pic = array();
         $text = array();
-        $r = $q->query("SELECT a.title,b.filename,a.session FROM blog AS a,pictures AS b WHERE a.session=b.session LIMIT 0,3",$con);
+        $r = $q->query("SELECT title,session,description FROM blog LIMIT 0,3",$con);
         while($d = $r->fetch_assoc()){
             array_push($pic,$d['session']);
             array_push($text,$d['title']);
