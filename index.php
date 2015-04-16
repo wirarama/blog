@@ -10,7 +10,7 @@ $c = new view();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>PPI Yamaguchi</title>
+    <title>Fricking Blog</title>
     <link href="<?php echo $c->host; ?>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo $c->host; ?>/css/style.css" rel="stylesheet">
 </head>

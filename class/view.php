@@ -1,8 +1,9 @@
 <?php
+require_once 'admin/class.php';
 class view{
     var $host = 'http://localhost/mine/blog';
     function nav(){
-        $nav = array('about','activities','contact');
+        $nav = array('about','activities','blog','contact');
         ?>
 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
@@ -13,8 +14,7 @@ class view{
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="navbar-brand"><img src="<?php echo $this->host; ?>/images/logo.png" class="img-responsive" style="margin-top: -5px;"></div>
-                <a class="navbar-brand" href="<?php echo $this->host; ?>"><em style="font-size:24px;"><span style="color:#ff5555;">PP</span><span style="color:#fff;">I</span></em> Yamaguchi</a>
+                <a class="navbar-brand" href="<?php echo $this->host; ?>">Situs Sundel Bangsat</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -30,8 +30,15 @@ class view{
 <?php
     }
     function carousel(){
-        $pic = array('001.jpg','002.jpg','003.jpg');
-        $text = array('Selamat Datang di PPI Yamaguchi','Foto Kegiatan Terbaru','Foto Bersama anggota dan lain lain');
+        $q = new database();
+        $con = $q->connect();
+        $pic = array();
+        $text = array();
+        $r = $q->query("SELECT a.text,b.filename FROM slide AS a,pictures AS b WHERE a.session=b.session",$con);
+        while($d = $r->fetch_assoc()){
+            array_push($pic,$d['filename']);
+            array_push($text,$d['text']);
+        }
         ?>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -49,7 +56,7 @@ class view{
             for($i=0;$i<sizeof($pic);$i++){
             ?>
     <div class="item <?php if($i==0){ echo 'active'; } ?>">
-        <div class="fill" style="background-image:url('<?php echo $this->host; ?>/images/<?php echo $pic[$i]; ?>');"></div>
+        <div class="fill" style="background-image:url('<?php echo $this->host; ?>/uploads/<?php echo $pic[$i]; ?>');"></div>
       <div class="carousel-caption">
         <h1><?php echo $text[$i]; ?></h1>
       </div>
@@ -69,10 +76,16 @@ class view{
 <?php
     }
     function menulist($title){
-        $pic = array('001.jpg','002.jpg','003.jpg');
-        $text = array('Indonesian Day','Pornas','Kegiatan Lain2');
+        $q = new database();
+        $con = $q->connect();
+        $pic = array();
+        $text = array();
+        $r = $q->query("SELECT a.title,b.filename,a.session FROM blog AS a,pictures AS b WHERE a.session=b.session LIMIT 0,3",$con);
+        while($d = $r->fetch_assoc()){
+            array_push($pic,$d['session']);
+            array_push($text,$d['title']);
+        }
         ?>
-
     <div class="container">
         <div class="col-lg-12">
             <h2 class="page-header"><?php echo $title; ?></h2>
@@ -83,7 +96,7 @@ class view{
             ?>
             <div class="col-md-4 portfolio-item">
                 <a href="<?php echo $this->host; ?>/blog">
-                    <img class="img-responsive img-thumbnail" src="<?php echo $this->host; ?>/images/thumbs/<?php echo $pic[$i]; ?>">
+                    <img class="img-responsive img-thumbnail" src="<?php echo $this->host; ?>/uploads/<?php echo $pic[$i]; ?>_thumb.jpg">
                 </a>
                 <h3><a href="<?php echo $this->host; ?>/blog"><?php echo $text[$i]; ?></a>
                 </h3>
@@ -95,7 +108,6 @@ class view{
 <?php
     }
     function bloglist(){
-        require_once 'admin/class.php';
         $q = new database();
         $con = $q->connect();
 ?>
@@ -216,7 +228,7 @@ class view{
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; PPI Yamaguchi 2014</p>
+                        <p>Copyright &copy; Fucking Whore</p>
                     </div>
                 </div>
             </footer>
@@ -365,4 +377,3 @@ class view{
     <?php
     }
 }
-?>
