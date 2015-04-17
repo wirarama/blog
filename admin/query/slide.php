@@ -15,9 +15,11 @@ if(getsuperglobal('get','submit')=='add' && !empty(getsuperglobal('get','text'))
         if(!empty($session)){
             $rpic = $q->query("SELECT filename FROM pictures WHERE session='".$session."'",$con);
             while($dpic = $rpic->fetch_assoc()){
-                $filename = $path.$dpic['filename'];
-                if (file_exists($filename)) {
-                    unlink($filename);
+                $filename = $path.'/uploads/'.$session.$i;
+                if (file_exists($filename.'.jpg')){
+                    unlink($filename.'.jpg');
+                    unlink($filename.'_thumb1.jpg');
+                    unlink($filename.'_thumb2.jpg');
                 }
             }
             $q->query("DELETE FROM pictures WHERE session='".$session."'",$con);

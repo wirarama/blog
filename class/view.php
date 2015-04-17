@@ -82,7 +82,7 @@ class view{
         $text = array();
         $r = $q->query("SELECT title,session,description FROM blog LIMIT 0,3",$con);
         while($d = $r->fetch_assoc()){
-            array_push($pic,$d['session']);
+            array_push($pic,$d['session'].'1.jpg');
             array_push($text,$d['title']);
         }
         ?>
@@ -362,7 +362,7 @@ class view{
         <div class="row">
 
             <div class="col-md-8">
-                <h2 class="page-header">PPI Yamaguchi</h2>
+                <h2 class="page-header">Fucking Fuck Fuck</h2>
                 <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>

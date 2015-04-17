@@ -17,7 +17,7 @@ if(getsuperglobal('get','submit')=='add' && !empty(getsuperglobal('get','title')
             $i = 1;
             while($dpic = $rpic->fetch_assoc()){
                 $filename = $path.'/uploads/'.$session.$i;
-                if (file_exists($filename)){
+                if (file_exists($filename.'.jpg')){
                     unlink($filename.'.jpg');
                     unlink($filename.'_thumb1.jpg');
                     unlink($filename.'_thumb2.jpg');
